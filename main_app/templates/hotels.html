@@ -1,0 +1,25 @@
+{% extends "main_app/base.html" %}
+{% block title %}Hotels{% endblock %}
+
+{% block content %}
+<h2 class="page-title">🏨 Available Hotels</h2>
+
+<div class="hotel-grid">
+    {% for hotel in hotels %}
+        <div class="hotel-card">
+            <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="hotel-image">
+            <div class="hotel-info">
+                <h3>{{ hotel.name }}</h3>
+                <p class="hotel-location">{{ hotel.city }}, {{ hotel.address }}</p>
+                <p class="hotel-desc">{{ hotel.description|truncatewords:15 }}</p>
+            </div>
+            <div class="hotel-hover">
+                <a href="{% url 'hotel_detail' hotel.id %}" class="learn-more-btn">Learn More</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No hotels available.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+

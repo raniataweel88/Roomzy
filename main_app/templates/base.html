@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hotel Booking{% endblock %}</title>
+      {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- ===== HEADER & NAVBAR ===== -->
+    <header class="navbar">
+        <div class="container">
+            <h1 class="logo">🏨 Hotel Booking</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{% url 'hotel_list' %}">Home</a></li>
+                    <li><a href="">Bookings</a></li>
+                    <li><a href="">Add Hotel</a></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; {{ now|date:"Y" }} Hotel Booking System — All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
