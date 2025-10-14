@@ -1,4 +1,4 @@
-{% extends "main_app/base.html" %}
+{% extends "base.html" %}
 {% block title %}Hotels{% endblock %}
 
 {% block content %}
@@ -7,7 +7,9 @@
 <div class="hotel-grid">
     {% for hotel in hotels %}
         <div class="hotel-card">
-            <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="hotel-image">
+         <h2>{{ hotel.name }}</h2>
+    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" width="200">
+  
             <div class="hotel-info">
                 <h3>{{ hotel.name }}</h3>
                 <p class="hotel-location">{{ hotel.city }}, {{ hotel.address }}</p>

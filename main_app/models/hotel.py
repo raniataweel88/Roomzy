@@ -8,7 +8,7 @@ class Hotel(models.Model):
     description = models.TextField()
     address = models.CharField(max_length=255,default='')
     rating = models.FloatField(default=0)
-    image = models.ImageField(upload_to='hotels/', blank=True, null=True)
+    image = models.ImageField(upload_to='media/')
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     def __str__(self):

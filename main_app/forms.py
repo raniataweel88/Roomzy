@@ -46,9 +46,17 @@ class ReviewForm(forms.ModelForm):
 class HotelForm(forms.ModelForm):
     class Meta:
         model = Hotel
-        fields = ["name", "city", "address", "description"]
+        fields = ["name", "city", "description", "address", "rating", "image", "email", "password"]
 
-
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Hotel Name"}),
+            "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
+            "description": forms.Textarea(attrs={"class": "form-control", "rows": 3, "placeholder": "Description"}),
+            "address": forms.TextInput(attrs={"class": "form-control", "placeholder": "Address"}),
+            "rating": forms.NumberInput(attrs={"class": "form-control", "step": "0.1"}),
+            "email": forms.EmailInput(attrs={"class": "form-control", "placeholder": "Email"}),
+            "password": forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Password"}),
+        }
 # -------------------------------
 # Room Form (Admin)
 # -------------------------------

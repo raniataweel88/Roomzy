@@ -16,11 +16,17 @@ Including another URLconf
 """
 # project/urls.py
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from main_app import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
-    path('', views.hotel_list, name='home'),           # الصفحة الرئيسية
-    path('hotels/', views.hotel_list, name='hotel_list'),  # قائمة الفنادق
-    # path('hotels/add/', views.hotel_create, name='hotel_create'),  # إنشاء فندق
+    path('', views.hotel_list, name='home'),           
+    path('hotels/', views.hotel_list, name='hotel_list'),
+     path("hotel/add/", views.hotel_create, name="hotel_create"),
+    path('hotel/<int:hotel_id>/', views.hotel_detail, name='hotel_detail'),
+
+
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

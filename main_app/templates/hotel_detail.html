@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ hotel.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ hotel.name }}</h2>
+<p><strong>City:</strong> {{ hotel.city }}</p>
+<p><strong>Address:</strong> {{ hotel.address }}</p>
+<p><strong>Description:</strong> {{ hotel.description }}</p>
+
+{% if hotel.image %}
+    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" width="300">
+{% endif %}
+
+<h3>Rooms</h3>
+{% if rooms %}
+    <ul>
+        {% for room in rooms %}
+            <li>
+                Room {{ room.room_number }} - {{ room.room_type }} - ${{ room.price_per_night }} per night
+                {% if room.is_available %} (Available) {% else %} (Booked) {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No rooms available for this hotel.</p>
+{% endif %}
+{% endblock %}
