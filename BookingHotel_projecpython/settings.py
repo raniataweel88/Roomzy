@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'BookingHotel_projecpython.wsgi.application'
  
 MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware',]
 
-ALLOWED_HOSTS = ["roomzy-8.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 
 DATABASE_URL = os.getenv("DATABASE_URL")
