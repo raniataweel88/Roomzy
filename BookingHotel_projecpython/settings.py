@@ -79,6 +79,22 @@ WSGI_APPLICATION = 'BookingHotel_projecpython.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+ 
+MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware',]
+
+ALLOWED_HOSTS = ["roomzy-8.onrender.com", "localhost", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=not DEBUG
+        )
+    }
+else:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
