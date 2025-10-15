@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-default-key')
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 # ALLOWED HOSTS
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "roomzy-8.onrender.com,localhost,127.0.0.1").split(",")
+ALLOWED_HOSTS = ["roomzy-8.onrender.com", "roomzy-1.onrender.com", "localhost", "127.0.0.1"]
 CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 
 # Application definition
