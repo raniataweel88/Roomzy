@@ -17,14 +17,37 @@ class RegisterForm(UserCreationForm):
 # -------------------------------
 # Booking Form
 # -------------------------------
-class BookingForm(forms.ModelForm):
-    check_in = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    check_out = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+from django import forms
+from .models import Booking
 
+ 
+
+# main_app/forms.py
+from django import forms
+from .models import Booking
+
+from django import forms
+from .models import Booking
+
+class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ["check_in", "check_out"]
-
+        fields = ['check_in_date', 'check_out_date', 'total_price']
+        widgets = {
+            'check_in_date': forms.DateInput(attrs={
+                'type': 'date',
+                'id': 'check_in_date'
+            }),
+            'check_out_date': forms.DateInput(attrs={
+                'type': 'date',
+                'id': 'check_out_date'
+            }),
+            'total_price': forms.NumberInput(attrs={
+                'readonly': 'readonly',
+                'placeholder': 'Total Price',
+                'id': 'total_price'
+            }),
+        }
 
 # -------------------------------
 # Review Form
@@ -63,5 +86,5 @@ class HotelForm(forms.ModelForm):
 class RoomForm(forms.ModelForm):
     class Meta:
         model = Room
-        fields =  ["hotel", "room_number", "room_type", "price_per_night", "is_available"]
+        fields =  ["room_number", "room_type", "price_per_night", "is_available"]
 

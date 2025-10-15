@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}My Bookings{% endblock %}
+{% block content %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/myBooking.css' %}">
+
+<div class="booking-list-container">
+  <h2>My Bookings</h2>
+
+  {% if bookings %}
+    <table class="booking-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Hotel</th>
+          <th>Room</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Booking Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ booking.room.hotel.name }}</td>
+          <td>{{ booking.room.room_number }}</td>
+          <td>${{ booking.total_price }}</td>
+          <td>{{ booking.status }}</td>
+          <td>{{ booking.check_in_date|date:"M d, Y" }} to {{ booking.check_out_date|date:"M d, Y" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You have no bookings yet. <a href="{% url 'hotel_list' %}">Book a room now!</a></p>
+  {% endif %}
+</div>
+{% endblock %}

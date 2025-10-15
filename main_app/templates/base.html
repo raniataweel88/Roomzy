@@ -17,20 +17,23 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="{% url 'hotel_list' %}">Home</a></li>
-                    <li><a href="">Bookings</a></li>
-<li><a href="{% url 'hotel_create' %}">Add Hotel</a></li>
-                    <li><a href="#">Login</a></li>
-                </ul>
+
+  {% if user.is_authenticated %} 
+                     <li><a href="{% url 'my_bookings' %}">Bookings</a></li>
+                     <li><a href="{% url 'logout_view' %}">Logout</a></li>
+    {% else %}
+    <li><a href="{% url 'hotel_create' %}">Add Hotel</a></li>
+<li> <a href="{% url 'user_login_view' %}">Login</a>
+</li>   {% endif %}          
+      </ul>
             </nav>
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main class="main-content">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container">
             <p>&copy; {{ now|date:"Y" }} Hotel Booking System — All Rights Reserved.</p>

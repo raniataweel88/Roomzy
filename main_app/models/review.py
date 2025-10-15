@@ -1,6 +1,7 @@
 from django.db import models
 from .hotel import Hotel 
 from .user import User
+
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='reviews')

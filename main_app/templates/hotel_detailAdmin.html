@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/hotel_detail.css' %}">
+
+<div class="hotel-detail-container">
+  <h2 class="hotel-name">{{ hotel.name }}</h2>
+  <div class="hotel-info">
+    <p><strong>City:</strong> {{ hotel.city }}</p>
+    <p><strong>Address:</strong> {{ hotel.address }}</p>
+    <p><strong>Description:</strong> {{ hotel.description }}</p>
+  </div>
+
+  {% if hotel.image %}
+  <div class="hotel-image">
+    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}">
+  </div>
+  {% endif %}
+
+  <div class="admin-actions">
+    <a href="{% url 'hotel_edit' hotel.id %}" class="btn-admin">Edit Hotel</a>
+    <a href="{% url 'room_create' hotel.id %}" class="btn-admin">Add Room</a>
+  </div>
+
+  <h3 class="section-title">Rooms</h3>
+  {% if rooms %}
+  <ul class="room-list">
+    {% for room in rooms %}
+    <li class="room-item {% if not room.is_available %}booked{% endif %}">
+      <div class="room-info">
+        <span>Room <strong>{{ room.room_number }}</strong> - {{ room.room_type }}</span>
+        <span class="price">${{ room.price_per_night }} / night</span>
+        {% if room.is_available %}
+        <span class="status available">Available</span>
+        {% else %}
+        <span class="status booked">Booked</span>
+        {% endif %}
+      </div>
+      {% if user.is_staff %}
+      <a href="{% url 'room_edit' room.id %}" class="btn-admin-small">Edit</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No rooms available for this hotel.</p>
+  {% endif %}
+
+  {% if user.is_staff %}
+  <h3 class="section-title">All Bookings for {{ hotel.name }}</h3>
+  <table class="booking-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Room</th>
+        <th>Status</th>
+        <th>Booking Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in hotel.bookings.all %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ booking.user.username }}</td>
+        <td>{{ booking.room.room_number }}</td>
+        <td>{{ booking.status }}</td>
+        <td>{{ booking.created_at|date:"M d, Y H:i" }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No bookings yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

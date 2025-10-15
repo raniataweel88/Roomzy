@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Book Room{% endblock %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+
+{% block content %}
+<div class="booking-container">
+  <h2>Book Your Stay at {{ room.name }}</h2>
+
+  <div class="booking-card">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-submit">Confirm Booking</button>
+    </form>
+  </div>
+
+  <div class="room-info">
+    <h3>Room Details</h3>
+    <p><strong>Hotel:</strong> {{ room.hotel.name }}</p>
+    <p><strong>Price per Night:</strong> {{ room.price }} $</p>
+    <p><strong>Capacity:</strong> {{ room.capacity }} people</p>
+  </div>
+</div>
+{% endblock %}

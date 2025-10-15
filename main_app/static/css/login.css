@@ -1,0 +1,56 @@
+form{
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #fff;
+     color: #D97D55;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+ h1 {
+    text-align: center;
+    color: #D97D55;
+    margin-bottom: 1.5rem;
+}
+form p{
+    margin-bottom: 1rem;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    border-color: #D97D55;
+    outline: none;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #D97D55;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #6FA4AF;
+}

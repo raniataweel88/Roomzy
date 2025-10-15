@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Edit {{ hotel.name }}{% endblock %}
+
+{% block content %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+<h2>Edit Hotel: {{ hotel.name }}</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-admin">Save Changes</button>
+</form>
+{% endblock %}

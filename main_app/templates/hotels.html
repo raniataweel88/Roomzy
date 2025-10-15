@@ -2,13 +2,12 @@
 {% block title %}Hotels{% endblock %}
 
 {% block content %}
-<h2 class="page-title">🏨 Available Hotels</h2>
 
 <div class="hotel-grid">
     {% for hotel in hotels %}
         <div class="hotel-card">
          <h2>{{ hotel.name }}</h2>
-    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" width="200">
+        <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" style="width:100%">
   
             <div class="hotel-info">
                 <h3>{{ hotel.name }}</h3>

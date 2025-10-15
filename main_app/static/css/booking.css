@@ -1,0 +1,73 @@
+/* ===== Booking Page Styling ===== */
+
+.booking-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", "Noto Sans Arabic", sans-serif;
+}
+
+.booking-container h2 {
+  text-align: center;
+  color: #6FA4AF;
+  margin-bottom: 20px;
+}
+
+.booking-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking-card input,
+.booking-card select,
+.booking-card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.booking-card input:focus,
+.booking-card select:focus,
+.booking-card textarea:focus {
+  border-color: #6FA4AF;
+  outline: none;
+}
+
+.btn-submit {
+  background: #6FA4AF;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  background: #6FA4AF;
+}
+
+.room-info {
+  margin-top: 25px;
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 15px 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.room-info h3 {
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.room-info p {
+  margin: 5px 0;
+  color: #374151;
+}

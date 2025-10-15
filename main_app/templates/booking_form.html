@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bookingForm.css' %}">
+
+<div class="form-container">
+    <h2>Book Room: {{ room.room_number }} - {{ room.room_type }}</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Confirm Booking</button>
+    </form>
+
+    <a href="{% url 'hotel_detail' hotel.id %}" class="back-link">Back to Hotel</a>
+</div>
+
+<script>
+    const checkIn = document.getElementById('check_in_date');
+    const checkOut = document.getElementById('check_out_date');
+    const totalPrice = document.getElementById('total_price');
+    const roomPrice = {{ room.price_per_night|floatformat:2 }};
+
+    function calculateTotal() {
+        const checkInDate = new Date(checkIn.value);
+        const checkOutDate = new Date(checkOut.value);
+        if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
+            const timeDiff = checkOutDate - checkInDate;
+            const nights = timeDiff / (1000 * 3600 * 24);
+            totalPrice.value = (nights * roomPrice).toFixed(2);
+        } else {
+            totalPrice.value = '';
+        }
+    }
+
+    checkIn.addEventListener('change', calculateTotal);
+    checkOut.addEventListener('change', calculateTotal);
+</script>
+
+{% endblock %}
