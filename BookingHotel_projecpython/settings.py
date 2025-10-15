@@ -95,16 +95,16 @@ if DATABASE_URL:
         )
     }
 else:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DB_RoomZy',  
-        'USER': 'rania',
-        'PASSWORD': 'r123456789',
-        'HOST': 'localhost',  
-        'PORT': '5432',
+    DATABASES = {  
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'DB_RoomZy',  
+            'USER': 'rania',
+            'PASSWORD': 'r123456789',
+            'HOST': 'localhost',  
+            'PORT': '5432',
+        }
     }
-}
 
 
 
