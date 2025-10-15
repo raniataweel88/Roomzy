@@ -12,8 +12,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-default-key')
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 # ALLOWED HOSTS
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1', 'https://roomzy-1-nxls.onrender.com/']
-CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'https://https://roomzy-1-nxls.onrender.com/']
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1', 'roomzy-1-nxls.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'https://roomzy-1-nxls.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
