@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User 
 from django.http import HttpResponse
 from django import forms
+from datetime import date
 
 # View all hotels
 def hotel_list(request):
@@ -104,14 +105,12 @@ def create_booking(request, hotel_id, room_id):
         form = BookingForm(request.POST)
         if form.is_valid():
             booking = form.save(commit=False)
-            # تحويل SimpleLazyObject إلى User instance
             booking.user = get_user(request)
             booking.room = room
             booking.save()
             return redirect('my_bookings')
     else:
         form = BookingForm()
-
     return render(request, 'booking_form.html', {
         'form': form,
         'hotel': hotel,
@@ -141,24 +140,33 @@ def booking_cancel(request, booking_id):
     return redirect("my_bookings")
 
 def my_bookings(request):
-    bookings = Booking.objects.filter(user=request.user).order_by('-id')  
-    return render(request, "myBooking.html", {"bookings": bookings})
+    bookings = Booking.objects.filter(user=request.user).order_by('-id') 
+    today = date.today()  
+    
+    return render(request, "myBooking.html", {
+        "bookings": bookings,
+        "today": today,})
 
 # Leave review
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+
 @login_required
-def review_create(request, room_id):
-    room = get_object_or_404(Room, id=room_id)
-    if request.method == "POST":
+def review_create(request, hotel_id):
+    hotel = get_object_or_404(Hotel, id=hotel_id)
+
+    if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.user = request.user
-            review.room = room
+            review.user = request.user._wrapped if hasattr(request.user, '_wrapped') else request.user
+            review.hotel = hotel
             review.save()
-            return redirect("room_detail", room_id=room.id)
+            return redirect('hotel_detail', hotel_id=hotel.id)
     else:
         form = ReviewForm()
-    return render(request, "review_form.html", {"form": form, "room": room})
+
+    return render(request, 'review_form.html', {'form': form, 'hotel': hotel})
 
 
 

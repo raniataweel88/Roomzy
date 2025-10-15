@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Hotel Booking{% endblock %}</title>
+    <title>{% block title %}Roomzy{% endblock %}</title>
       {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% block extra_head %}{% endblock %}
@@ -13,7 +13,7 @@
     <!-- ===== HEADER & NAVBAR ===== -->
     <header class="navbar">
         <div class="container">
-            <h1 class="logo">🏨 Hotel Booking</h1>
+            <h1 class="logo">🏨 Roomzy</h1>
             <nav>
                 <ul class="nav-links">
                     <li><a href="{% url 'hotel_list' %}">Home</a></li>

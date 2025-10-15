@@ -28,6 +28,7 @@
           <td>${{ booking.total_price }}</td>
           <td>{{ booking.status }}</td>
           <td>{{ booking.check_in_date|date:"M d, Y" }} to {{ booking.check_out_date|date:"M d, Y" }}</td>
+          
         </tr>
         {% endfor %}
       </tbody>

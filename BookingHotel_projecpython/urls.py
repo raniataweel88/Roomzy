@@ -33,8 +33,8 @@ urlpatterns = [
     path('hotel/<int:hotel_id>/admin/', views.hotel_detail_Admin, name='hotel_detail_Admin'),
  path('hotel/<int:hotel_id>/edit/', views.hotel_edit, name='hotel_edit'), 
     path('hotel/<int:hotel_id>/room/add/', views.room_create, name='room_create'),
-
   path('hotel/<int:hotel_id>/room/<int:room_id>/createBooking/', views.create_booking, name='create_booking'),
+path('hotel/<int:hotel_id>/review/add/', views.review_create, name='review_create'),
 
 
 
