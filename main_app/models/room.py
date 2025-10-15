@@ -7,6 +7,7 @@ class Room(models.Model):
     room_type = models.CharField(max_length=50)
     price_per_night = models.DecimalField(max_digits=8, decimal_places=2)
     is_available = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='media/')
 
     def __str__(self):
         return f"{self.hotel.name} - Room {self.room_number}"

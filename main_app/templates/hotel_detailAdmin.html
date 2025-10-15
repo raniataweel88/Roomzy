@@ -25,24 +25,37 @@
 
   <h3 class="section-title">Rooms</h3>
   {% if rooms %}
-  <ul class="room-list">
-    {% for room in rooms %}
-    <li class="room-item {% if not room.is_available %}booked{% endif %}">
-      <div class="room-info">
-        <span>Room <strong>{{ room.room_number }}</strong> - {{ room.room_type }}</span>
-        <span class="price">${{ room.price_per_night }} / night</span>
-        {% if room.is_available %}
-        <span class="status available">Available</span>
-        {% else %}
-        <span class="status booked">Booked</span>
-        {% endif %}
-      </div>
-      {% if user.is_staff %}
-      <a href="{% url 'room_edit' room.id %}" class="btn-admin-small">Edit</a>
-      {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+    <ul class="room-list">
+        {% for room in rooms %}
+        <li class="room-item {% if not room.is_available %}booked{% endif %}">
+            <!-- Room Image -->
+            {% if room.image %}
+            <div class="room-image">
+                <img src="{{ room.image.url }}" alt="Room {{ room.room_number }}">
+            </div>
+            {% else %}
+            <div class="room-image">
+                <img src="{% static 'images/default_room.jpg' %}" alt="No Image">
+            </div>
+            {% endif %}
+
+            <div class="room-info">
+                <span>Room <strong>{{ room.room_number }}</strong> - {{ room.room_type }}</span>
+                <span class="price">${{ room.price_per_night }} / night</span>
+                {% if room.is_available %}
+                    <span class="status available">Available</span>
+                {% else %}
+                    <span class="status booked">Booked</span>
+                {% endif %}
+            </div>
+
+            {% if user.is_staff %}
+            <a href="{% url 'room_edit' room.id %}" class="btn-admin-small">Edit</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
   {% else %}
   <p>No rooms available for this hotel.</p>
   {% endif %}

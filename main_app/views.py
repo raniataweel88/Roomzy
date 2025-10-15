@@ -214,7 +214,7 @@ def admin_required(user):
 def room_create(request, hotel_id):
     hotel = get_object_or_404(Hotel, id=hotel_id)
     if request.method == 'POST':
-        form = RoomForm(request.POST)
+        form = RoomForm(request.POST, request.FILES)  
         if form.is_valid():
             room = form.save(commit=False)
             room.hotel = hotel
@@ -223,7 +223,6 @@ def room_create(request, hotel_id):
     else:
         form = RoomForm()
     return render(request, 'room_create.html', {'form': form, 'hotel': hotel})
-
 
 def room_edit(request, id):
     room = get_object_or_404(Room, id=id)

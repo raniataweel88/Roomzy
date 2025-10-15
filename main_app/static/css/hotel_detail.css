@@ -288,6 +288,7 @@ body {
 .room-info {
   display: flex;
   flex-direction: column;
+  text-align:left;
 }
 
 .price {

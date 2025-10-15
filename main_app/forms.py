@@ -86,5 +86,5 @@ class HotelForm(forms.ModelForm):
 class RoomForm(forms.ModelForm):
     class Meta:
         model = Room
-        fields =  ["room_number", "room_type", "price_per_night", "is_available"]
+        fields = ["room_number", "room_type", "price_per_night", "is_available", "image"]
 

@@ -1,14 +1,11 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Hotel Booking{% endblock %}</title>
-      {% load static %}
-<link rel="stylesheet" href="{% static 'css/hotel_detail.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/hotel_detail.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -20,59 +17,70 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="{% url 'hotel_list' %}">Home</a></li>
-
-                         {% if user.is_authenticated %} 
-                     <li><a href="{% url 'my_bookings' %}">Bookings</a></li>
-                     <li><a href="{% url 'logout_view' %}">Logout</a></li>
-    {% else %}
-    <li><a href="{% url 'hotel_create' %}">Add Hotel</a></li>
-<li> <a href="{% url 'user_login_view' %}">Login</a>
-</li>   {% endif %}          
-      </ul>
+                    {% if user.is_authenticated %} 
+                        <li><a href="{% url 'my_bookings' %}">Bookings</a></li>
+                        <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'hotel_create' %}">Add Hotel</a></li>
+                        <li><a href="{% url 'user_login_view' %}">Login</a></li>
+                    {% endif %}          
+                </ul>
             </nav>
         </div>
     </header>
 
-
     <main class="main-content">
-{% block content %}
-    <!-- Hero section with background image -->
-    <div class="hotel-hero" style="background-image: url('{{ hotel.image.url }}');">
-        <div class="overlay">
-            <h1>{{ hotel.name }}</h1>
-           
-        </div>
-    </div>
- <div class="hotel-details">
-                <p><strong>City:</strong> {{ hotel.city }}</p>
-                <p><strong>Address:</strong> {{ hotel.address }}</p>
-                <p><strong>Description:</strong> {{ hotel.description }}</p>
+    {% block content %}
+        <!-- Hero section with background image -->
+        <div class="hotel-hero" style="background-image: url('{{ hotel.image.url }}');">
+            <div class="overlay">
+                <h1>{{ hotel.name }}</h1>
             </div>
-    <!-- Rooms section -->
-    <h3 style="text-align:center;">Rooms</h3>
-    {% if rooms %}
-    <ul class="rooms-list">
-        {% for room in rooms %}
-        <li class="room-item">
-            <span>Room {{ room.room_number }} - {{ room.room_type }} - ${{ room.price_per_night }}/night</span>
-            {% if room.is_available %}
-                <strong>(Available)</strong>
-                {% if user.is_authenticated %}
-                <a href="{% url 'create_booking' hotel.id room.id %}" class="btn-book">Book Now</a>
-                {% else %}
-                    <a href="{% url 'user_login_view' %}" class="btn-book">Login to Book</a>
-                {% endif %}
-            {% else %}
-                <span class="booked">(Booked)</span>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p style="text-align:center;">No rooms available for this hotel.</p>
-    {% endif %}
-</main>
-{% endblock %}   
+        </div>
+
+        <div class="hotel-details">
+            <p><strong>City:</strong> {{ hotel.city }}</p>
+            <p><strong>Address:</strong> {{ hotel.address }}</p>
+            <p><strong>Description:</strong> {{ hotel.description }}</p>
+        </div>
+
+        <!-- Rooms section -->
+        <h3 style="text-align:center;">Rooms</h3>
+
+        {% if rooms %}
+            <ul class="rooms-list">
+            {% for room in rooms %}
+                <li class="room-item">
+                    <!-- Room Image -->
+                    {% if room.image %}
+                        <img src="{{ room.image.url }}" alt="Room {{ room.room_number }}" class="room-image">
+                    {% else %}
+                        <img src="{% static 'images/default_room.jpg' %}" alt="No Image" class="room-image">
+                    {% endif %}
+
+                    <!-- Room Info -->
+                    <span>Room {{ room.room_number }} - {{ room.room_type }} - ${{ room.price_per_night }}/night</span>
+
+                    <!-- Availability -->
+                    {% if room.is_available %}
+                        <strong>(Available)</strong>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'create_booking' hotel.id room.id %}" class="btn-book">Book Now</a>
+                        {% else %}
+                            <a href="{% url 'user_login_view' %}" class="btn-book">Login to Book</a>
+                        {% endif %}
+                    {% else %}
+                        <span class="booked">(Booked)</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p style="text-align:center;">No rooms available for this hotel.</p>
+        {% endif %}
+
+    {% endblock %}
+    </main>
 
     <footer class="footer">
         <div class="container">
